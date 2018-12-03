@@ -15,6 +15,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
 @property (nonatomic, weak) IBOutlet UITextView *notesTextView;
+@property (nonatomic, weak) IBOutlet UIButton *saveNotesButton;
+
+- (IBAction)saveNotesButtonTouched:(id)sender;
 
 @end
 

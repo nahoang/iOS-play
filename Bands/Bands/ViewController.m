@@ -46,6 +46,7 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
+    self.saveNotesButton.enabled = YES;
     return YES;
 }
 
@@ -53,7 +54,13 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 {
     self.bandObject.notes = self.notesTextView.text;
     [self.notesTextView resignFirstResponder];
+    self.saveNotesButton.enabled = NO;
     return YES;
+}
+
+- (IBAction)saveNotesButtonTouched:(id)sender
+{
+    [self textViewShouldEndEditing:self.notesTextView];
 }
 
 - (void)saveBandObject
