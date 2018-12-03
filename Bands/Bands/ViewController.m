@@ -44,6 +44,18 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     return YES;
 }
 
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    return YES;
+}
+
+- (BOOL) textViewShouldEndEditing:(UITextField *)textView
+{
+    self.bandObject.notes = self.notesTextView.text;
+    [self.notesTextView resignFirstResponder];
+    return YES;
+}
+
 - (void)saveBandObject
 {
     NSData *bandObjectData = [NSKeyedArchiver archivedDataWithRootObject:self.bandObject];

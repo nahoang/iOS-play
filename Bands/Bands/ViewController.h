@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "WBABand.h"
 
-@interface ViewController : UIViewController <UITextFieldDelegate>
+@interface ViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) WBABand *bandObject;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property (nonatomic, weak) IBOutlet UITextField *nameTextField;
+@property (nonatomic, weak) IBOutlet UITextView *notesTextView;
 
 @end
 
