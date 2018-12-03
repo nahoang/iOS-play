@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B79F883021AE9CBD00188B44 /* WBABand.m in Sources */ = {isa = PBXBuildFile; fileRef = B79F882F21AE9CBD00188B44 /* WBABand.m */; };
+		B79F883521AE9E9400188B44 /* WBABand.m in Sources */ = {isa = PBXBuildFile; fileRef = B79F883421AE9E9400188B44 /* WBABand.m */; };
 		B7FC234621AD518D00E5E304 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FC234521AD518D00E5E304 /* AppDelegate.m */; };
 		B7FC234921AD518D00E5E304 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FC234821AD518D00E5E304 /* ViewController.m */; };
 		B7FC234C21AD518D00E5E304 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7FC234A21AD518D00E5E304 /* Main.storyboard */; };
@@ -17,7 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B79F882F21AE9CBD00188B44 /* WBABand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBABand.m; sourceTree = "<group>"; };
+		B79F883321AE9E9400188B44 /* WBABand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBABand.h; sourceTree = "<group>"; };
+		B79F883421AE9E9400188B44 /* WBABand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBABand.m; sourceTree = "<group>"; };
 		B7FC234121AD518D00E5E304 /* Bands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7FC234421AD518D00E5E304 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B7FC234521AD518D00E5E304 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -44,7 +45,6 @@
 		B7FC233821AD518D00E5E304 = {
 			isa = PBXGroup;
 			children = (
-				B79F882F21AE9CBD00188B44 /* WBABand.m */,
 				B7FC234321AD518D00E5E304 /* Bands */,
 				B7FC234221AD518D00E5E304 /* Products */,
 			);
@@ -70,6 +70,8 @@
 				B7FC234F21AD518F00E5E304 /* LaunchScreen.storyboard */,
 				B7FC235221AD518F00E5E304 /* Info.plist */,
 				B7FC235321AD518F00E5E304 /* main.m */,
+				B79F883321AE9E9400188B44 /* WBABand.h */,
+				B79F883421AE9E9400188B44 /* WBABand.m */,
 			);
 			path = Bands;
 			sourceTree = "<group>";
@@ -147,7 +149,7 @@
 				B7FC234921AD518D00E5E304 /* ViewController.m in Sources */,
 				B7FC235421AD518F00E5E304 /* main.m in Sources */,
 				B7FC234621AD518D00E5E304 /* AppDelegate.m in Sources */,
-				B79F883021AE9CBD00188B44 /* WBABand.m in Sources */,
+				B79F883521AE9E9400188B44 /* WBABand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

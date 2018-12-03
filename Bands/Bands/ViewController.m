@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+static NSString *bandObjectKey = @"BABandObjectKey";
+
 @interface ViewController ()
 
 @end
@@ -17,6 +19,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"titleLable.text = %@", self.titleLabel.text);
+    
+    self.bandObject = [[WBABand alloc] init];
+}
+
+- (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    self.bandObject.name = self.nameTextField.text;
+    [self.nameTextField resignFirstResponder];
+    return YES;
+}
+
+- (BOOL) textFieldShouldEndEditing:(UITextField *)textField
+{
+    self.bandObject.name = self.nameTextField.text;
+//    [self saveBandObject];
+    [self.nameTextField resignFirstResponder];
+    return YES;
+}
+
+- (void)saveBandObject
+{
+    NSData *bandObjectData = [NSKeyedArchiver archivedDataWithRootObject:self.bandObject];
+    [[NSUserDefaults standardUserDefaults] setObject:bandObjectData forKey:bandObjectKey];
+    //[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 

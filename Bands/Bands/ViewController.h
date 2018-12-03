@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WBABand.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITextFieldDelegate>
 
+@property (nonatomic, strong) WBABand *bandObject;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 
 @end
 

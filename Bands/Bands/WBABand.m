@@ -6,4 +6,8 @@
 //  Copyright © 2018 hoang nguyen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "WBABand.h"
+
+@implementation WBABand
+
+@end
