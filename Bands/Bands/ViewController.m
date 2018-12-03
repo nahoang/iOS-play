@@ -63,6 +63,12 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     [self textViewShouldEndEditing:self.notesTextView];
 }
 
+- (IBAction)ratingStepperValueChanged:(id)sender
+{
+    self.ratingValueLabel.text = [NSString stringWithFormat:@"%g", self.ratingStepper.value];
+    self.bandObject.rating = (int)self.ratingStepper.value;
+}
+
 - (void)saveBandObject
 {
     NSData *bandObjectData = [NSKeyedArchiver archivedDataWithRootObject:self.bandObject];

@@ -16,8 +16,11 @@
 @property (nonatomic, weak) IBOutlet UITextField *nameTextField;
 @property (nonatomic, weak) IBOutlet UITextView *notesTextView;
 @property (nonatomic, weak) IBOutlet UIButton *saveNotesButton;
+@property (nonatomic, weak) IBOutlet UIStepper *ratingStepper;
+@property (nonatomic, weak) IBOutlet UILabel *ratingValueLabel;
 
 - (IBAction)saveNotesButtonTouched:(id)sender;
+- (IBAction)ratingStepperValueChanged:(id)sender;
 
 @end
 

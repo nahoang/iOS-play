@@ -69,6 +69,27 @@
                                     <action selector="saveNotesButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kAc-AP-Qwb"/>
                                 </connections>
                             </button>
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="oW1-zt-L7F">
+                                <rect key="frame" x="36" y="378" width="94" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="ratingStepperValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="K3w-Un-bbt"/>
+                                </connections>
+                            </stepper>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rating:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmz-bB-kMO">
+                                <rect key="frame" x="36" y="334" width="54" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6rO-HN-dyk">
+                                <rect key="frame" x="275" y="378" width="11" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -76,6 +97,8 @@
                     <connections>
                         <outlet property="nameTextField" destination="baP-C2-ypM" id="Uny-EX-AZW"/>
                         <outlet property="notesTextView" destination="PIq-o4-84b" id="UXw-r9-KrK"/>
+                        <outlet property="ratingStepper" destination="oW1-zt-L7F" id="cLt-WI-lVT"/>
+                        <outlet property="ratingValueLabel" destination="6rO-HN-dyk" id="vcs-Zo-zhZ"/>
                         <outlet property="saveNotesButton" destination="eFs-aK-l13" id="Yto-L5-lii"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="DQf-9U-M7a"/>
                     </connections>
