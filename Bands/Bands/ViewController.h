@@ -19,11 +19,13 @@
 @property (nonatomic, weak) IBOutlet UIStepper *ratingStepper;
 @property (nonatomic, weak) IBOutlet UILabel *ratingValueLabel;
 @property (nonatomic, weak) IBOutlet UISegmentedControl *touringStatusSegmentedControl;
+@property (nonatomic, weak) IBOutlet UISwitch *haveSeenLiveSwitch;
 
 
 - (IBAction)saveNotesButtonTouched:(id)sender;
 - (IBAction)ratingStepperValueChanged:(id)sender;
 - (IBAction)tourStatusSegmentedControlValueChanged:(id)sender;
+- (IBAction)haveSeenLiveSwitchValueChanged:(id)sender;
 
 @end
 

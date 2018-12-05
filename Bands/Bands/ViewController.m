@@ -74,6 +74,13 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     self.bandObject.touringStatus = self.touringStatusSegmentedControl.selectedSegmentIndex;
 }
 
+- (IBAction)haveSeenLiveSwitchValueChanged:(id)sender
+{
+    self.bandObject.haveSeenLive = self.haveSeenLiveSwitch.on;
+}
+
+
+
 - (void)saveBandObject
 {
     NSData *bandObjectData = [NSKeyedArchiver archivedDataWithRootObject:self.bandObject];
