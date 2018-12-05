@@ -90,6 +90,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Touring Status:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYe-xn-hIe">
+                                <rect key="frame" x="36" y="430" width="116" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YRD-Vr-wwp">
+                                <rect key="frame" x="44" y="459" width="269" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="On Tour"/>
+                                    <segment title="Off Tour"/>
+                                    <segment title="Disbanded"/>
+                                </segments>
+                                <connections>
+                                    <action selector="tourStatusSegmentedControlValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="oVf-Dz-Mgf"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -100,6 +119,7 @@
                         <outlet property="ratingStepper" destination="oW1-zt-L7F" id="cLt-WI-lVT"/>
                         <outlet property="ratingValueLabel" destination="6rO-HN-dyk" id="vcs-Zo-zhZ"/>
                         <outlet property="saveNotesButton" destination="eFs-aK-l13" id="Yto-L5-lii"/>
+                        <outlet property="touringStatusSegmentedControl" destination="YRD-Vr-wwp" id="btF-mA-54x"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="DQf-9U-M7a"/>
                     </connections>
                 </viewController>

@@ -69,6 +69,11 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     self.bandObject.rating = (int)self.ratingStepper.value;
 }
 
+- (IBAction)tourStatusSegmentedControlValueChanged:(id)sender
+{
+    self.bandObject.touringStatus = self.touringStatusSegmentedControl.selectedSegmentIndex;
+}
+
 - (void)saveBandObject
 {
     NSData *bandObjectData = [NSKeyedArchiver archivedDataWithRootObject:self.bandObject];

@@ -18,9 +18,12 @@
 @property (nonatomic, weak) IBOutlet UIButton *saveNotesButton;
 @property (nonatomic, weak) IBOutlet UIStepper *ratingStepper;
 @property (nonatomic, weak) IBOutlet UILabel *ratingValueLabel;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *touringStatusSegmentedControl;
+
 
 - (IBAction)saveNotesButtonTouched:(id)sender;
 - (IBAction)ratingStepperValueChanged:(id)sender;
+- (IBAction)tourStatusSegmentedControlValueChanged:(id)sender;
 
 @end
 
