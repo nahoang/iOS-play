@@ -14,7 +14,7 @@ typedef enum {
     WBATouringStatusDisbanded
 } WBATouringStatus;
 
-@interface WBABand : NSObject
+@interface WBABand : NSObject <NSCoding>
 
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *notes;
