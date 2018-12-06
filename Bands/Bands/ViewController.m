@@ -32,6 +32,7 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     self.bandObject.name = self.nameTextField.text;
+    [self saveBandObject];
     [self.nameTextField resignFirstResponder];
     return YES;
 }
@@ -53,6 +54,7 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 - (BOOL) textViewShouldEndEditing:(UITextField *)textView
 {
     self.bandObject.notes = self.notesTextView.text;
+    [self saveBandObject];
     [self.notesTextView resignFirstResponder];
     self.saveNotesButton.enabled = NO;
     return YES;
@@ -67,16 +69,19 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 {
     self.ratingValueLabel.text = [NSString stringWithFormat:@"%g", self.ratingStepper.value];
     self.bandObject.rating = (int)self.ratingStepper.value;
+    [self saveBandObject];
 }
 
 - (IBAction)tourStatusSegmentedControlValueChanged:(id)sender
 {
     self.bandObject.touringStatus = self.touringStatusSegmentedControl.selectedSegmentIndex;
+    [self saveBandObject];
 }
 
 - (IBAction)haveSeenLiveSwitchValueChanged:(id)sender
 {
     self.bandObject.haveSeenLive = self.haveSeenLiveSwitch.on;
+    [self saveBandObject];
 }
 
 

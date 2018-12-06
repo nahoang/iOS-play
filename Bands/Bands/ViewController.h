@@ -27,5 +27,7 @@
 - (IBAction)tourStatusSegmentedControlValueChanged:(id)sender;
 - (IBAction)haveSeenLiveSwitchValueChanged:(id)sender;
 
+- (void)saveBandObject;
+
 @end
 
