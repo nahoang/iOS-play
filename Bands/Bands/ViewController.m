@@ -115,6 +115,23 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     self.haveSeenLiveSwitch.on = self.bandObject.haveSeenLive;
 }
 
+- (IBAction)deleteButtonTouched:(id)sender
+{
+    UIActionSheet *promptDeleteDataActionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete Band" otherButtonTitles:nil];
+    [promptDeleteDataActionSheet showInView:self.view];
+}
+
+- (void)actionSheet: (UIActionSheet *)actionSheet
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.destructiveButtonIndex == buttonIndex) {
+        self.bandObject = nil;
+        [self setUserInterfaceValues];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:bandObjectKey];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
