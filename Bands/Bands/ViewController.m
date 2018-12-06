@@ -21,7 +21,11 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"titleLable.text = %@", self.titleLabel.text);
     
-    self.bandObject = [[WBABand alloc] init];
+    [self loadBandObject];
+    if(!self.bandObject) {
+        self.bandObject = [[WBABand alloc] init];
+    }
+    [self setUserInterfaceValues];
 }
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
@@ -91,6 +95,24 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     NSData *bandObjectData = [NSKeyedArchiver archivedDataWithRootObject:self.bandObject];
     [[NSUserDefaults standardUserDefaults] setObject:bandObjectData forKey:bandObjectKey];
     //[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)loadBandObject
+{
+    NSData *bandObjectData = [[NSUserDefaults standardUserDefaults] objectForKey:bandObjectKey];
+    if(bandObjectData) {
+        self.bandObject = [NSKeyedUnarchiver unarchiveObjectWithData:bandObjectData];
+    }
+}
+
+- (void)setUserInterfaceValues
+{
+    self.nameTextField.text = self.bandObject.name;
+    self.notesTextView.text = self.bandObject.notes;
+    self.ratingStepper.value = self.bandObject.rating;
+    self.ratingValueLabel.text = [NSString stringWithFormat:@"%g", self.ratingStepper.value];
+    self.touringStatusSegmentedControl.selectedSegmentIndex = self.bandObject.touringStatus;
+    self.haveSeenLiveSwitch.on = self.bandObject.haveSeenLive;
 }
 
 

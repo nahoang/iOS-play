@@ -28,6 +28,8 @@
 - (IBAction)haveSeenLiveSwitchValueChanged:(id)sender;
 
 - (void)saveBandObject;
+- (void)loadBandObject;
+- (void)setUserInterfaceValues;
 
 @end
 
