@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B73CC2D321BA7D05005F5572 /* WBABandsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73CC2D221BA7D05005F5572 /* WBABandsListTableViewController.m */; };
 		B79F883521AE9E9400188B44 /* WBABand.m in Sources */ = {isa = PBXBuildFile; fileRef = B79F883421AE9E9400188B44 /* WBABand.m */; };
 		B7FC234621AD518D00E5E304 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FC234521AD518D00E5E304 /* AppDelegate.m */; };
 		B7FC234921AD518D00E5E304 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FC234821AD518D00E5E304 /* ViewController.m */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B73CC2D121BA7D05005F5572 /* WBABandsListTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBABandsListTableViewController.h; sourceTree = "<group>"; };
+		B73CC2D221BA7D05005F5572 /* WBABandsListTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBABandsListTableViewController.m; sourceTree = "<group>"; };
 		B79F883321AE9E9400188B44 /* WBABand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBABand.h; sourceTree = "<group>"; };
 		B79F883421AE9E9400188B44 /* WBABand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBABand.m; sourceTree = "<group>"; };
 		B7FC234121AD518D00E5E304 /* Bands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bands.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +75,8 @@
 				B7FC235321AD518F00E5E304 /* main.m */,
 				B79F883321AE9E9400188B44 /* WBABand.h */,
 				B79F883421AE9E9400188B44 /* WBABand.m */,
+				B73CC2D121BA7D05005F5572 /* WBABandsListTableViewController.h */,
+				B73CC2D221BA7D05005F5572 /* WBABandsListTableViewController.m */,
 			);
 			path = Bands;
 			sourceTree = "<group>";
@@ -148,6 +153,7 @@
 			files = (
 				B7FC234921AD518D00E5E304 /* ViewController.m in Sources */,
 				B7FC235421AD518F00E5E304 /* main.m in Sources */,
+				B73CC2D321BA7D05005F5572 /* WBABandsListTableViewController.m in Sources */,
 				B7FC234621AD518D00E5E304 /* AppDelegate.m in Sources */,
 				B79F883521AE9E9400188B44 /* WBABand.m in Sources */,
 			);
