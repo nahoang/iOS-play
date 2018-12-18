@@ -23,12 +23,49 @@ static NSString *bandsDictionarytKey = @"BABandsDictionarytKey";
     [super viewDidLoad];
     [self loadBandsDictionary];
     
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.clearsSelectionOnViewWillAppear = NO;
+    
     // Uncomment the following line to preserve selection between presentations.
 //     self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 //     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //    [self.navigationController setNavigationBarHidden:NO];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    if(editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [self deleteBandAtIndexPath:indexPath];
+    }
+}
+
+- (void) deleteBandAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *sectionHeader = [self.firstLettersArray objectAtIndex:indexPath.section];
+    NSMutableArray *bandForLetter = [self.bandsDictionary objectForKey:sectionHeader];
+    [bandForLetter removeObjectAtIndex:indexPath.row];
+    
+    if(bandForLetter.count == 0)
+    {
+        [self.firstLettersArray removeObject:sectionHeader];
+        [self.bandsDictionary removeObjectForKey:sectionHeader];
+        [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    else
+    {
+        [self.bandsDictionary setObject:bandForLetter forKey:sectionHeader];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+    [self saveBandsDictionary];
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,13 +154,54 @@ static NSString *bandsDictionarytKey = @"BABandsDictionarytKey";
     
     if(self.bandDetailsViewController)
     {
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
         if(self.bandDetailsViewController.saveBand)
         {
-            [self addNewBand:self.bandDetailsViewController.bandObject];
-            [self.tableView reloadData];
+            if(selectedIndexPath)
+            {
+                [self updateBandObject:self.bandDetailsViewController.bandObject atIndexPath:selectedIndexPath];
+                [self.tableView deselectRowAtIndexPath:selectedIndexPath animated:YES];
+            }
+            else
+            {
+                [self addNewBand:self.bandDetailsViewController.bandObject];
+                [self.tableView reloadData];
+            }
+           
+        }
+        else if(selectedIndexPath)
+        {
+            [self deleteBandAtIndexPath:selectedIndexPath];
         }
         self.bandDetailsViewController = nil;
     }
+}
+
+- (void)updateBandObject:(WBABand *)bandObject
+             atIndexPath:(NSIndexPath *)indexPath
+{
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    NSString *sectionHeader = [self.firstLettersArray
+                               objectAtIndex:selectedIndexPath.section];
+    NSMutableArray *bandsForSection = [self.bandsDictionary
+                                       objectForKey:sectionHeader];
+    [bandsForSection removeObjectAtIndex:indexPath.row];
+    [bandsForSection addObject:bandObject];
+    [bandsForSection sortUsingSelector:@selector(compare:)];
+    [self.bandsDictionary setObject:bandsForSection forKey:sectionHeader];
+    [self saveBandsDictionary];
+}
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    NSString *sectionHeader = [self.firstLettersArray
+                               objectAtIndex:selectedIndexPath.section];
+    NSMutableArray *bandsForSection = [self.bandsDictionary
+                                       objectForKey:sectionHeader];
+    WBABand *bandObject = [bandsForSection objectAtIndex:selectedIndexPath.row];
+    self.bandDetailsViewController = segue.destinationViewController;
+    self.bandDetailsViewController.bandObject = bandObject;
+    self.bandDetailsViewController.saveBand = YES;
 }
 
 - (IBAction)addBandTouched:(id)sender

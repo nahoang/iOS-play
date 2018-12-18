@@ -99,28 +99,36 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     [promptDeleteDataActionSheet showInView:self.view];
 }
 
-- (void)actionSheet: (UIActionSheet *)actionSheet
+- (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(actionSheet.destructiveButtonIndex == buttonIndex) {
+    if(actionSheet.destructiveButtonIndex == buttonIndex)
+    {
         self.bandObject = nil;
         self.saveBand = NO;
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if(self.navigationController)
+            [self.navigationController popViewControllerAnimated:YES];
+        else
+            [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
 - (IBAction)saveButtonTouched:(id)sender
 {
-    if (self.bandObject.name && self.bandObject.name.length > 0)
+    if(!self.bandObject.name || self.bandObject.name.length == 0)
     {
-        self.saveBand = YES;
-        [self dismissViewControllerAnimated:YES completion:nil];
+        UIAlertView *noBandNameAlertView = [[UIAlertView alloc]
+                                            initWithTitle:@"Error" message:@"Please supply a name for the band"
+                                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [noBandNameAlertView show];
     }
     else
     {
-        UIAlertView *noBandNameAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please supply a name for a band" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [noBandNameAlertView show];
+        self.saveBand = YES;
+        if(self.navigationController)
+            [self.navigationController popViewControllerAnimated:YES];
+        else
+            [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 //- (IBAction)saveButtonTouched:(id)sender
