@@ -10,7 +10,7 @@
 		B73CC2D321BA7D05005F5572 /* WBABandsListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73CC2D221BA7D05005F5572 /* WBABandsListTableViewController.m */; };
 		B79F883521AE9E9400188B44 /* WBABand.m in Sources */ = {isa = PBXBuildFile; fileRef = B79F883421AE9E9400188B44 /* WBABand.m */; };
 		B7FC234621AD518D00E5E304 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FC234521AD518D00E5E304 /* AppDelegate.m */; };
-		B7FC234921AD518D00E5E304 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FC234821AD518D00E5E304 /* ViewController.m */; };
+		B7FC234921AD518D00E5E304 /* WBABandDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7FC234821AD518D00E5E304 /* WBABandDetailsViewController.m */; };
 		B7FC234C21AD518D00E5E304 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7FC234A21AD518D00E5E304 /* Main.storyboard */; };
 		B7FC234E21AD518F00E5E304 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7FC234D21AD518F00E5E304 /* Assets.xcassets */; };
 		B7FC235121AD518F00E5E304 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7FC234F21AD518F00E5E304 /* LaunchScreen.storyboard */; };
@@ -25,8 +25,8 @@
 		B7FC234121AD518D00E5E304 /* Bands.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bands.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7FC234421AD518D00E5E304 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B7FC234521AD518D00E5E304 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B7FC234721AD518D00E5E304 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B7FC234821AD518D00E5E304 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B7FC234721AD518D00E5E304 /* WBABandDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WBABandDetailsViewController.h; sourceTree = "<group>"; };
+		B7FC234821AD518D00E5E304 /* WBABandDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WBABandDetailsViewController.m; sourceTree = "<group>"; };
 		B7FC234B21AD518D00E5E304 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7FC234D21AD518F00E5E304 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7FC235021AD518F00E5E304 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -66,8 +66,8 @@
 			children = (
 				B7FC234421AD518D00E5E304 /* AppDelegate.h */,
 				B7FC234521AD518D00E5E304 /* AppDelegate.m */,
-				B7FC234721AD518D00E5E304 /* ViewController.h */,
-				B7FC234821AD518D00E5E304 /* ViewController.m */,
+				B7FC234721AD518D00E5E304 /* WBABandDetailsViewController.h */,
+				B7FC234821AD518D00E5E304 /* WBABandDetailsViewController.m */,
 				B7FC234A21AD518D00E5E304 /* Main.storyboard */,
 				B7FC234D21AD518F00E5E304 /* Assets.xcassets */,
 				B7FC234F21AD518F00E5E304 /* LaunchScreen.storyboard */,
@@ -151,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7FC234921AD518D00E5E304 /* ViewController.m in Sources */,
+				B7FC234921AD518D00E5E304 /* WBABandDetailsViewController.m in Sources */,
 				B7FC235421AD518F00E5E304 /* main.m in Sources */,
 				B73CC2D321BA7D05005F5572 /* WBABandsListTableViewController.m in Sources */,
 				B7FC234621AD518D00E5E304 /* AppDelegate.m in Sources */,

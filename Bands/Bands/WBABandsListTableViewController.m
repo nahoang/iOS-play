@@ -7,21 +7,28 @@
 //
 
 #import "WBABandsListTableViewController.h"
+#import "WBABandDetailsViewController.h"
+#import "WBABand.h"
 
 @interface WBABandsListTableViewController ()
 
 @end
 
+static NSString *bandsDictionarytKey = @"BABandsDictionarytKey";
+
 @implementation WBABandsListTableViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self loadBandsDictionary];
     
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+//     self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+//    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,12 +40,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Incomplete implementation, return the number of sections
-    return 1;
+    return self.bandsDictionary.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return 10;
+    NSString *firstLetter = [self.firstLettersArray objectAtIndex:section];
+    NSMutableArray *bandsForLetter = [self.bandsDictionary objectForKey:firstLetter];
+    return bandsForLetter.count;
 }
 
 
@@ -46,10 +55,82 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
  
+    NSString *firstLetter = [self.firstLettersArray objectAtIndex:indexPath.section];
+    NSMutableArray *bandsForLetter = [self.bandsDictionary objectForKey:firstLetter];
+    WBABand *bandObject = [bandsForLetter objectAtIndex:indexPath.row];
+    
     //Configure the cell...
-    cell.textLabel.text = [NSString stringWithFormat:@"%d", indexPath.row];
+    cell.textLabel.text = bandObject.name;
     
     return cell;
+}
+
+- (void) addNewBand: (WBABand *)bandObject
+{
+    NSString *bandNameFirstLetter = [bandObject.name substringToIndex:1];
+    NSMutableArray *bandsForLetter = [self.bandsDictionary objectForKey:bandNameFirstLetter];
+    
+    if(!bandsForLetter) {
+        bandsForLetter = [NSMutableArray array];
+    }
+    
+    [bandsForLetter addObject:bandObject];
+    [bandsForLetter sortUsingSelector:@selector(compare:)];
+    [self.bandsDictionary setObject:bandsForLetter forKey:bandNameFirstLetter];
+    
+    if(![self.firstLettersArray containsObject:bandNameFirstLetter])
+    {
+        [self.firstLettersArray addObject:bandNameFirstLetter];
+        [self.firstLettersArray sortUsingSelector:@selector(compare:)];
+    }
+    [self saveBandsDictionary];
+}
+
+- (void) saveBandsDictionary
+{
+    NSData *bandsDictionaryData = [NSKeyedArchiver archivedDataWithRootObject:self.bandsDictionary];
+    [[NSUserDefaults standardUserDefaults] setObject:bandsDictionaryData forKey:bandsDictionarytKey];
+}
+
+- (void) loadBandsDictionary
+{
+    NSData *bandsDictionaryData = [[NSUserDefaults standardUserDefaults] objectForKey:bandsDictionarytKey];
+    
+    if(bandsDictionaryData)
+    {
+        self.bandsDictionary = [NSKeyedUnarchiver
+                                unarchiveObjectWithData:bandsDictionaryData];
+        self.firstLettersArray = [NSMutableArray
+                                  arrayWithArray:self.bandsDictionary.allKeys];
+        [self.firstLettersArray sortUsingSelector:@selector(compare:)];
+    }
+    else
+    {
+        self.bandsDictionary = [NSMutableDictionary dictionary];
+        self.firstLettersArray = [NSMutableArray array];
+    }
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if(self.bandDetailsViewController)
+    {
+        if(self.bandDetailsViewController.saveBand)
+        {
+            [self addNewBand:self.bandDetailsViewController.bandObject];
+            [self.tableView reloadData];
+        }
+        self.bandDetailsViewController = nil;
+    }
+}
+
+- (IBAction)addBandTouched:(id)sender
+{
+    UIStoryboard *mainStoryBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    self.bandDetailsViewController = (WBABandDetailsViewController *)[mainStoryBoard instantiateViewControllerWithIdentifier: @"bandDetails"];
+    [self presentViewController:self.bandDetailsViewController animated:YES completion:nil];
 }
 
 
@@ -96,5 +177,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
 
 @end

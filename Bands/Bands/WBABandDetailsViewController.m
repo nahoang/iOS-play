@@ -6,26 +6,26 @@
 //  Copyright © 2018 hoang nguyen. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "WBABandDetailsViewController.h"
 
 static NSString *bandObjectKey = @"BABandObjectKey";
 
-@interface ViewController ()
+@interface WBABandDetailsViewController ()
 
 @end
 
-@implementation ViewController
+@implementation WBABandDetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"titleLable.text = %@", self.titleLabel.text);
     
-    [self loadBandObject];
     if(!self.bandObject) {
         self.bandObject = [[WBABand alloc] init];
     }
     [self setUserInterfaceValues];
+    
 }
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
@@ -36,7 +36,6 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 - (BOOL) textFieldShouldReturn:(UITextField *)textField
 {
     self.bandObject.name = self.nameTextField.text;
-    [self saveBandObject];
     [self.nameTextField resignFirstResponder];
     return YES;
 }
@@ -58,7 +57,6 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 - (BOOL) textViewShouldEndEditing:(UITextField *)textView
 {
     self.bandObject.notes = self.notesTextView.text;
-    [self saveBandObject];
     [self.notesTextView resignFirstResponder];
     self.saveNotesButton.enabled = NO;
     return YES;
@@ -73,36 +71,16 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 {
     self.ratingValueLabel.text = [NSString stringWithFormat:@"%g", self.ratingStepper.value];
     self.bandObject.rating = (int)self.ratingStepper.value;
-    [self saveBandObject];
 }
 
 - (IBAction)tourStatusSegmentedControlValueChanged:(id)sender
 {
     self.bandObject.touringStatus = self.touringStatusSegmentedControl.selectedSegmentIndex;
-    [self saveBandObject];
 }
 
 - (IBAction)haveSeenLiveSwitchValueChanged:(id)sender
 {
     self.bandObject.haveSeenLive = self.haveSeenLiveSwitch.on;
-    [self saveBandObject];
-}
-
-
-
-- (void)saveBandObject
-{
-    NSData *bandObjectData = [NSKeyedArchiver archivedDataWithRootObject:self.bandObject];
-    [[NSUserDefaults standardUserDefaults] setObject:bandObjectData forKey:bandObjectKey];
-    //[[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)loadBandObject
-{
-    NSData *bandObjectData = [[NSUserDefaults standardUserDefaults] objectForKey:bandObjectKey];
-    if(bandObjectData) {
-        self.bandObject = [NSKeyedUnarchiver unarchiveObjectWithData:bandObjectData];
-    }
 }
 
 - (void)setUserInterfaceValues
@@ -126,12 +104,40 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(actionSheet.destructiveButtonIndex == buttonIndex) {
         self.bandObject = nil;
-        [self setUserInterfaceValues];
+        self.saveBand = NO;
         
-        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:bandObjectKey];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 
+- (IBAction)saveButtonTouched:(id)sender
+{
+    if (self.bandObject.name && self.bandObject.name.length > 0)
+    {
+        self.saveBand = YES;
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertView *noBandNameAlertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please supply a name for a band" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [noBandNameAlertView show];
+    }
+}
+//- (IBAction)saveButtonTouched:(id)sender
+//{
+//    if(self.bandObject.name && self.bandObject.name.length > 0)
+//    {
+//        self.saveBand = YES;
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }
+//    else
+//    {
+//        UIAlertView *noBandNameAlertView = [[UIAlertView alloc]
+//                                            initWithTitle:@"Error" message:@"Please supply a name for the band"
+//                                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+//        [noBandNameAlertView show];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

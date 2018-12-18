@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="WNJ-mN-zia">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Sdr-cs-dnh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -42,7 +42,13 @@
                             <outlet property="delegate" destination="WNJ-mN-zia" id="6rK-yl-1yO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Bands" id="2cL-iv-zNd"/>
+                    <navigationItem key="navigationItem" title="Bands" id="2cL-iv-zNd">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="P7o-Va-OFV">
+                            <connections>
+                                <action selector="addBandTouched:" destination="WNJ-mN-zia" id="A1M-mZ-aFQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xh6-an-NwR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -56,18 +62,21 @@
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Bxh-80-E8T">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
-                        <segue destination="WNJ-mN-zia" kind="relationship" relationship="rootViewController" id="FBm-Bz-hdx"/>
+                        <segue destination="WNJ-mN-zia" kind="relationship" relationship="rootViewController" id="Lr0-Lc-rlN"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rLG-aL-N3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3337" y="8"/>
+            <point key="canvasLocation" x="-3366" y="-15"/>
         </scene>
-        <!--View Controller-->
+        <!--Band Details View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="bandDetails" id="BYZ-38-t0r" customClass="WBABandDetailsViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -165,13 +174,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-H9-05e">
-                                <rect key="frame" x="144" y="526" width="45" height="30"/>
-                                <state key="normal" title="Delete"/>
-                                <connections>
-                                    <action selector="deleteButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oiV-8H-HdE"/>
-                                </connections>
-                            </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PIq-o4-84b">
                                 <rect key="frame" x="32" y="173" width="240" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -184,10 +186,26 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Juu-f5-XM9"/>
                                 </connections>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GmO-v2-Aq3">
+                                <rect key="frame" x="38" y="534" width="34" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DdT-JX-JOk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BmT-H9-05e">
+                                <rect key="frame" x="279" y="534" width="45" height="30"/>
+                                <state key="normal" title="Delete"/>
+                                <connections>
+                                    <action selector="deleteButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oiV-8H-HdE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BmT-H9-05e" secondAttribute="bottom" constant="90" id="bIr-7x-XF0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="BmT-H9-05e" secondAttribute="bottom" constant="103" id="HZg-3W-q5V"/>
+                            <constraint firstItem="BmT-H9-05e" firstAttribute="leading" secondItem="GmO-v2-Aq3" secondAttribute="trailing" constant="207" id="x6g-i4-lTn"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="GmO-v2-Aq3" secondAttribute="bottom" constant="103" id="xgL-pm-ct2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -203,7 +221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4039" y="8"/>
+            <point key="canvasLocation" x="-4039.1999999999998" y="7.6461769115442282"/>
         </scene>
     </scenes>
 </document>

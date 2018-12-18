@@ -37,4 +37,10 @@ static NSString *haveSeenLiveKey = @"BAHaveSeenLiveKey";
     [coder encodeInteger:self.touringStatus forKey:tourStatusKey];
     [coder encodeBool:self.haveSeenLive forKey:haveSeenLiveKey];
 }
+
+- (NSComparisonResult) compare: (WBABand *)otherObject
+{
+    return [self.name compare:otherObject.name];
+}
+
 @end
