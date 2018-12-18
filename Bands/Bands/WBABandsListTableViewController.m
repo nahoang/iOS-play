@@ -133,6 +133,20 @@ static NSString *bandsDictionarytKey = @"BABandsDictionarytKey";
     [self presentViewController:self.bandDetailsViewController animated:YES completion:nil];
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [self.firstLettersArray objectAtIndex:section];
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return self.firstLettersArray;
+}
+
+- (int)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(nonnull NSString *)title atIndex:(NSInteger)index
+{
+    return [self.firstLettersArray indexOfObject:title];
+}
 
 /*
 // Override to support conditional editing of the table view.
