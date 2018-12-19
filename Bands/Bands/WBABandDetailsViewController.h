@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "WBABand.h"
 
-@interface WBABandDetailsViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate>
+@interface WBABandDetailsViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate,
+    UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) WBABand *bandObject;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
@@ -35,6 +36,7 @@
 - (void)setUserInterfaceValues;
 - (void) bandImageViewTapDetected;
 - (void) bandImageViewSwipeDetected;
+- (void) presentPhotoLibraryImagePicker;
 
 @end
 

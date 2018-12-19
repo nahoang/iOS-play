@@ -36,6 +36,33 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     
 }
 
+- (void) presentPhotoLibraryImagePicker
+{
+    UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    [self presentViewController:imagePickerController animated:YES completion:nil];
+}
+
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    UIImage *selectedImage = [info objectForKey:UIImagePickerControllerEditedImage];
+    if (selectedImage == NULL)
+    {
+        selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    }
+    self.bandImageView.image = selectedImage;
+    self.addPhotoLabel.hidden = YES;
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
 {
     return YES;
@@ -142,7 +169,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 - (void) bandImageViewTapDetected
 {
-    NSLog(@"band image tap detected");
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
+        [self presentPhotoLibraryImagePicker];
+    }
+    else
+    {
+        UIAlertView *photoLibraryErrorAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There are no" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [photoLibraryErrorAlert show];
+        
+    }
 }
 
 - (void) bandImageViewSwipeDetected
