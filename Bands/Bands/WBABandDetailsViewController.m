@@ -26,6 +26,14 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     }
     [self setUserInterfaceValues];
     
+    UITapGestureRecognizer *bandImageViewTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bandImageViewTapDetected)];
+    bandImageViewTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.bandImageView addGestureRecognizer:bandImageViewTapGestureRecognizer];
+    
+    UISwipeGestureRecognizer *bandImageViewSwipeGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(bandImageViewSwipeDetected)];
+    bandImageViewSwipeGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.bandImageView addGestureRecognizer:bandImageViewSwipeGestureRecognizer];
+    
 }
 
 - (BOOL) textFieldShouldBeginEditing:(UITextField *)textField
@@ -130,6 +138,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
         else
             [self dismissViewControllerAnimated:YES completion:nil];
     }
+}
+
+- (void) bandImageViewTapDetected
+{
+    NSLog(@"band image tap detected");
+}
+
+- (void) bandImageViewSwipeDetected
+{
+    NSLog(@"band image swipe detected");
 }
 //- (IBAction)saveButtonTouched:(id)sender
 //{

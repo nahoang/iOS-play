@@ -21,6 +21,8 @@
 @property (nonatomic, weak) IBOutlet UISegmentedControl *touringStatusSegmentedControl;
 @property (nonatomic, weak) IBOutlet UISwitch *haveSeenLiveSwitch;
 @property (nonatomic, assign) BOOL saveBand;
+@property (nonatomic, assign) IBOutlet UIImageView * bandImageView;
+@property (nonatomic, assign) IBOutlet UILabel *addPhotoLabel;
 
 
 - (IBAction)saveNotesButtonTouched:(id)sender;
@@ -31,6 +33,8 @@
 - (IBAction)saveButtonTouched:(id)sender;
 
 - (void)setUserInterfaceValues;
+- (void) bandImageViewTapDetected;
+- (void) bandImageViewSwipeDetected;
 
 @end
 
