@@ -7,12 +7,14 @@
 //
 
 #import "WBABand.h"
+#import <UIKit/UIkit.h>
 
 static NSString *nameKey =  @"BANameKey";
 static NSString *notesKey = @"BANotesKey";
 static NSString *ratingKey = @"BARatingKey";
 static NSString *tourStatusKey = @"BATourStatusKey";
 static NSString *haveSeenLiveKey = @"BAHaveSeenLiveKey";
+static NSString *bandImageKey = @"BABandImageKey";
 
 @implementation WBABand
 
@@ -26,6 +28,12 @@ static NSString *haveSeenLiveKey = @"BAHaveSeenLiveKey";
     self.touringStatus = [coder decodeObjectForKey:tourStatusKey];
     self.haveSeenLive = [coder decodeObjectForKey:haveSeenLiveKey];
     
+    NSData *bandImageData = [coder decodeObjectForKey:bandImageKey];
+    if(bandImageData)
+    {
+        self.bandImage = [UIImage imageWithData:bandImageData];
+    }
+    
     return self;
 }
 
@@ -36,6 +44,9 @@ static NSString *haveSeenLiveKey = @"BAHaveSeenLiveKey";
     [coder encodeInteger:self.rating forKey:ratingKey];
     [coder encodeInteger:self.touringStatus forKey:tourStatusKey];
     [coder encodeBool:self.haveSeenLive forKey:haveSeenLiveKey];
+    
+    NSData *bandImageData = UIImagePNGRepresentation(self.bandImage);
+    [coder encodeObject:bandImageData forKey:bandImageKey];
 }
 
 - (NSComparisonResult) compare: (WBABand *)otherObject

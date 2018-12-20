@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "WBABand.h"
 
+typedef enum {
+    WBAActionSheetTagDeleteBand,
+    WBAActionSheetTagDeleteBandImage
+} WBAActionSheetTag;
+
 @interface WBABandDetailsViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate,
     UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

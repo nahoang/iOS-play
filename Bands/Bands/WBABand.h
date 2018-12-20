@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIkit.h>
 
 typedef enum {
     WBATouringStatusOnTour,
@@ -21,5 +22,6 @@ typedef enum {
 @property (nonatomic, assign) int rating;
 @property (nonatomic, assign) WBATouringStatus touringStatus;
 @property (nonatomic, assign) BOOL haveSeenLive;
+@property (nonatomic, strong) UIImage *bandImage;
 
 @end

@@ -53,6 +53,7 @@ static NSString *bandObjectKey = @"BABandObjectKey";
         selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
     }
     self.bandImageView.image = selectedImage;
+    self.bandObject.bandImage = selectedImage;
     self.addPhotoLabel.hidden = YES;
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -126,6 +127,12 @@ static NSString *bandObjectKey = @"BABandObjectKey";
     self.ratingValueLabel.text = [NSString stringWithFormat:@"%g", self.ratingStepper.value];
     self.touringStatusSegmentedControl.selectedSegmentIndex = self.bandObject.touringStatus;
     self.haveSeenLiveSwitch.on = self.bandObject.haveSeenLive;
+    
+    if (self.bandObject.bandImage)
+    {
+        self.bandImageView.image = self.bandObject.bandImage;
+        self.addPhotoLabel.hidden = YES;
+    }
 }
 
 - (IBAction)deleteButtonTouched:(id)sender
@@ -137,15 +144,28 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(actionSheet.destructiveButtonIndex == buttonIndex)
+    if (actionSheet.tag == WBAActionSheetTagDeleteBandImage)
     {
-        self.bandObject = nil;
-        self.saveBand = NO;
-        if(self.navigationController)
-            [self.navigationController popViewControllerAnimated:YES];
-        else
-            [self dismissViewControllerAnimated:YES completion:nil];
+        if(buttonIndex == actionSheet.destructiveButtonIndex)
+        {
+            self.bandObject.bandImage = nil;
+            self.bandImageView.image = nil;
+            self.addPhotoLabel.hidden = NO;
+        }
     }
+    else if (actionSheet.tag == WBAActionSheetTagDeleteBand)
+    {
+        if(actionSheet.destructiveButtonIndex == buttonIndex)
+        {
+            self.bandObject = nil;
+            self.saveBand = NO;
+            if(self.navigationController)
+                [self.navigationController popViewControllerAnimated:YES];
+            else
+                [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }
+    
 }
 
 - (IBAction)saveButtonTouched:(id)sender
@@ -183,23 +203,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 - (void) bandImageViewSwipeDetected
 {
-    NSLog(@"band image swipe detected");
+    if (self.bandObject.bandImage)
+    {
+        UIActionSheet *deleteBandImageActionSheet =
+        [[UIActionSheet alloc] initWithTitle:nil delegate:self
+                           cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete Picture"
+                           otherButtonTitles:nil];
+        deleteBandImageActionSheet.tag = WBAActionSheetTagDeleteBandImage;
+        [deleteBandImageActionSheet showInView:self.view];
+    }
 }
-//- (IBAction)saveButtonTouched:(id)sender
-//{
-//    if(self.bandObject.name && self.bandObject.name.length > 0)
-//    {
-//        self.saveBand = YES;
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-//    else
-//    {
-//        UIAlertView *noBandNameAlertView = [[UIAlertView alloc]
-//                                            initWithTitle:@"Error" message:@"Please supply a name for the band"
-//                                            delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-//        [noBandNameAlertView show];
-//    }
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
