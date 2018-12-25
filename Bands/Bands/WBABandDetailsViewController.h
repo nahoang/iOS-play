@@ -11,8 +11,14 @@
 
 typedef enum {
     WBAActionSheetTagDeleteBand,
-    WBAActionSheetTagDeleteBandImage
+    WBAActionSheetTagDeleteBandImage,
+    WBAActionSheetTagChooseImagePickerSource
 } WBAActionSheetTag;
+
+typedef enum {
+    WBAImagePickerSourceCamera,
+    WBAImagePickerSourcePhotoLibrary
+} WBAImagePickerSource;
 
 @interface WBABandDetailsViewController : UIViewController <UITextFieldDelegate, UITextViewDelegate, UIActionSheetDelegate,
     UIImagePickerControllerDelegate, UINavigationControllerDelegate>

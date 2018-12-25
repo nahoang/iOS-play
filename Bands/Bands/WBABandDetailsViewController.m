@@ -144,7 +144,18 @@ static NSString *bandObjectKey = @"BABandObjectKey";
 - (void)actionSheet:(UIActionSheet *)actionSheet
 clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (actionSheet.tag == WBAActionSheetTagDeleteBandImage)
+    if(actionSheet.tag == WBAActionSheetTagChooseImagePickerSource)
+    {
+        if(buttonIndex == WBAImagePickerSourceCamera)
+        {
+            [self presentCameraImagePicker];
+        }
+        else if (buttonIndex == WBAImagePickerSourcePhotoLibrary)
+        {
+            [self presentPhotoLibraryImagePicker];
+        }
+    }
+    else if(actionSheet.tag == WBAActionSheetTagDeleteBandImage)
     {
         if(buttonIndex == actionSheet.destructiveButtonIndex)
         {
@@ -153,9 +164,9 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
             self.addPhotoLabel.hidden = NO;
         }
     }
-    else if (actionSheet.tag == WBAActionSheetTagDeleteBand)
+    else if(actionSheet.tag == WBAActionSheetTagDeleteBand)
     {
-        if(actionSheet.destructiveButtonIndex == buttonIndex)
+        if(buttonIndex == actionSheet.destructiveButtonIndex)
         {
             self.bandObject = nil;
             self.saveBand = NO;
@@ -165,7 +176,17 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
                 [self dismissViewControllerAnimated:YES completion:nil];
         }
     }
-    
+}
+
+- (void)presentCameraImagePicker
+{
+    UIImagePickerController *imagePickerController =
+    [[UIImagePickerController alloc] init];
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePickerController.delegate = self;
+    imagePickerController.allowsEditing = YES;
+    [self presentViewController:imagePickerController
+                       animated:YES completion:nil];
 }
 
 - (IBAction)saveButtonTouched:(id)sender
@@ -187,17 +208,29 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
     }
 }
 
-- (void) bandImageViewTapDetected
+- (void)bandImageViewTapDetected
 {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    if([UIImagePickerController
+        isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
+        UIActionSheet *chooseCameraActionSheet = [[UIActionSheet alloc]
+                                                  initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel"
+                                                  destructiveButtonTitle:nil otherButtonTitles:@"Take with Camera",
+                                                  @"Choose from Photo Library", nil];
+        chooseCameraActionSheet.tag = WBAActionSheetTagChooseImagePickerSource;
+        [chooseCameraActionSheet showInView:self.view];
+    }
+    else if([UIImagePickerController
+             isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
     {
         [self presentPhotoLibraryImagePicker];
     }
     else
     {
-        UIAlertView *photoLibraryErrorAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There are no" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView *photoLibraryErrorAlert = [[UIAlertView alloc]
+                                               initWithTitle:@"Error" message:@"There are no" delegate:nil
+                                               cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [photoLibraryErrorAlert show];
-        
     }
 }
 
